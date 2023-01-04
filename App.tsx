@@ -1,10 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import {TailwindProvider} from 'tailwind-rn';
-import utilities from './tailwind.json';
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { TailwindProvider } from "tailwind-rn";
+import utilities from "./tailwind.json";
+import useCachedResources from "./hooks/useCachedResources";
+import useColorScheme from "./hooks/useColorScheme";
+import Navigation from "./navigation";
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -16,10 +18,12 @@ export default function App() {
     return (
       // @ts-ignore - Tailwind Provider is missing type definition
       <TailwindProvider utilities={utilities}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
+        <Provider store={store}>
+          <SafeAreaProvider>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </SafeAreaProvider>
+        </Provider>
       </TailwindProvider>
     );
   }
