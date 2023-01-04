@@ -28,6 +28,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import PostsScreen from "../screens/PostsScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 export default function Navigation({
   colorScheme,
@@ -53,6 +54,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
