@@ -18,8 +18,7 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 import CounterScreen from "../screens/CounterScreen";
 import {
   RootStackParamList,
@@ -87,17 +86,17 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Profile"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="Profile"
+        component={ProfileScreen}
+        options={({ navigation }: RootTabScreenProps<"Profile">) => ({
+          title: "Profile",
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Modal")}
@@ -116,18 +115,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
         name="Counter"
         component={CounterScreen}
         options={{
-          title: "Tab Counter",
+          title: "Counter",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="calculator" color={color} />
           ),
@@ -137,7 +128,7 @@ function BottomTabNavigator() {
         name="Posts"
         component={PostsScreen}
         options={{
-          title: "Tab Posts",
+          title: "Posts",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="sticky-note" color={color} />
           ),

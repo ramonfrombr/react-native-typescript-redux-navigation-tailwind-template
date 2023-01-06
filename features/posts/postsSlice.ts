@@ -2,6 +2,8 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import { sub } from "date-fns";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 // Define a type for the slice state
 interface PostsState {
@@ -24,6 +26,28 @@ export interface ReactionAddedPayload {
   postId: string;
   reaction: string;
 }
+
+const getPosts = async () => {
+  let posts: any = [];
+  const querySnapshot = await getDocs(collection(db, "posts"));
+
+  querySnapshot.forEach((doc) => {
+    const post = {
+      id: doc.id,
+      title: doc.data().title,
+      content: doc.data().content,
+      date: doc.data().date,
+      userId: doc.data().userId,
+      reactions: doc.data().reactions,
+    };
+
+    posts.push(post);
+  });
+
+  return posts;
+};
+
+console.log(getPosts());
 
 // Define the initial state using that type
 const initialState: PostsState = {
@@ -64,14 +88,20 @@ export const postsSlice = createSlice({
       reducer(state, action: PayloadAction<PostState>) {
         state.posts.push(action.payload);
       },
-      prepare(title: string, content: string, userId: string) {
+      prepare(
+        id: string,
+        title: string,
+        content: string,
+        date: string,
+        userId: string
+      ) {
         return {
           payload: {
-            id: nanoid(),
+            id,
             title,
             content,
             userId,
-            date: new Date().toISOString(),
+            date,
             reactions: {
               like: 0,
               love: 0,

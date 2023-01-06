@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
+import { auth } from "../../firebase";
 
 export interface UserProps {
   id: string;
@@ -11,11 +12,7 @@ interface UsersState {
 }
 
 const initialState: UsersState = {
-  users: [
-    { id: "0", name: "Dude Smith" },
-    { id: "1", name: "Fred Smith" },
-    { id: "2", name: "John Smith" },
-  ],
+  users: [{ id: auth.currentUser?.uid!, name: auth.currentUser?.displayName! }],
 };
 
 export const usersSlice = createSlice({
