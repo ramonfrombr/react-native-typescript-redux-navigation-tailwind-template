@@ -12,6 +12,9 @@ import { useTailwind } from "tailwind-rn";
 import { useNavigation } from "@react-navigation/core";
 import { auth } from "../firebase";
 
+import { APP_ENV_FIREBASE_API_KEY } from "@env";
+import config from "../config";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -59,6 +62,8 @@ const LoginScreen = () => {
         behavior="height"
         style={tw("flex-[1] justify-center items-center")}
       >
+        <Text>{APP_ENV_FIREBASE_API_KEY}</Text>
+        <Text>{config.APP_ENV_FIREBASE_API_KEY}</Text>
         <View style={tw("w-4/5")}>
           <TextInput
             placeholder="Email"
