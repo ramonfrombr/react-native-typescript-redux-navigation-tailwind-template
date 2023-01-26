@@ -12,6 +12,9 @@ import { useTailwind } from "tailwind-rn";
 import { useNavigation } from "@react-navigation/core";
 import { auth } from "../firebase";
 
+import { APP_ENV_FIREBASE_API_KEY } from "@env";
+import config from "../config";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
