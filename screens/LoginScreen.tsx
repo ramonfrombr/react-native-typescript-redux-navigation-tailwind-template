@@ -62,8 +62,6 @@ const LoginScreen = () => {
         behavior="height"
         style={tw("flex-[1] justify-center items-center")}
       >
-        <Text>{APP_ENV_FIREBASE_API_KEY}</Text>
-        <Text>{config.APP_ENV_FIREBASE_API_KEY}</Text>
         <View style={tw("w-4/5")}>
           <TextInput
             placeholder="Email"
